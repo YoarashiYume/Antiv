@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="MessagePack">
+      <UniqueIdentifier>{2675d768-f186-421a-8626-299d80a9adc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BasePack">
+      <UniqueIdentifier>{7a73c125-a6c0-4999-bb03-e48d615c1926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BasePack\header">
+      <UniqueIdentifier>{636dfafc-50a2-4176-a032-4e7c649a9fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BasePack\code">
+      <UniqueIdentifier>{7e833e6f-272b-40cc-931e-13d2b0cc209c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessagePack\header">
+      <UniqueIdentifier>{2e321b24-ed2f-4da7-b6ed-322a019bd4a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessagePack\code">
+      <UniqueIdentifier>{925cc1e0-0dca-4e3c-8e3e-f576c42321bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordData.cpp">
+      <Filter>BasePack\code</Filter>
+    </ClCompile>
+    <ClCompile Include="SHA256.cpp">
+      <Filter>BasePack\code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\client\Serializer.cpp">
+      <Filter>MessagePack\code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\client\Messanger.cpp">
+      <Filter>MessagePack\code</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordBank.cpp">
+      <Filter>BasePack\code</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SHA256.h">
+      <Filter>BasePack\header</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordData.hpp">
+      <Filter>BasePack\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Record.hpp">
+      <Filter>BasePack\header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\client\Packages.hpp">
+      <Filter>MessagePack\header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\client\Serializer.hpp">
+      <Filter>MessagePack\header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\client\Messanger.hpp">
+      <Filter>MessagePack\header</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordBank.hpp">
+      <Filter>BasePack\header</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
