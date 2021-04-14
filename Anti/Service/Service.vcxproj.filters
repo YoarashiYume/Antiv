@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\Service">
+      <UniqueIdentifier>{f2782a00-1f51-4175-ae27-bb34b42768f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Service">
+      <UniqueIdentifier>{579f9902-4dba-4223-b7c0-9fb5004e091a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -24,12 +30,72 @@
     <ClCompile Include="FileWorker.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="ScanEngen.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Monitor.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Schedule.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="timeStruct.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="_service\AntimalwareService.cpp">
+      <Filter>Исходные файлы\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="_service\Service.cpp">
+      <Filter>Исходные файлы\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="_service\ServiceManager.cpp">
+      <Filter>Исходные файлы\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulesSrializer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="_service\ServiceInitializer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="schrodingerData.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="FileWorker.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ScanEngen.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ScanObject.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Monitor.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Schedule.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="timeStruct.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="_service\AntimalwareService.h">
+      <Filter>Файлы заголовков\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="_service\Service.h">
+      <Filter>Файлы заголовков\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="_service\ServiceInitializer.h">
+      <Filter>Файлы заголовков\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="_service\ServiceManager.h">
+      <Filter>Файлы заголовков\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulesSrializer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

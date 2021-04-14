@@ -64,6 +64,7 @@ std::optional<DataIO::Record> DataIO::DataReader::deserializeRecord(std::string&
 	deserFunc(DataIO::hashSize, *temp.hash.data());
 	deserFunc(sizeof(temp.offsetStart), temp.offsetStart);
 	deserFunc(sizeof(temp.offsetEnd), temp.offsetEnd);
+	deserFunc(sizeof(temp.type), temp.type);
 	return temp;
 }
 
@@ -77,12 +78,23 @@ bool DataIO::DataReader::reopen(std::size_t _offset)
 std::string DataIO::createData()
 {
 	std::string path = std::filesystem::current_path().string() + "\\baseData.bin";
-	uint64_t count = 0;
+	return createData(std::filesystem::current_path().string() + "\\baseData.bin");
+	/*uint64_t count = 0;
 	std::ofstream outFile(path, std::ios::binary | std::ios::trunc);
 	outFile.write(DataIO::dataIndex,std::strlen(DataIO::dataIndex));
 	outFile.write((char*)&count, sizeof(count));
 	outFile.close();
-	return path;
+	return path;*/
+}
+
+std::string DataIO::createData(std::string str)
+{
+	uint64_t count = 0;
+	std::ofstream outFile(str, std::ios::binary | std::ios::trunc);
+	outFile.write(DataIO::dataIndex, std::strlen(DataIO::dataIndex));
+	outFile.write((char*)&count, sizeof(count));
+	outFile.close();
+	return str;
 }
 
 bool DataIO::isCorrectData(std::string& _path)
@@ -115,7 +127,7 @@ std::string DataIO::DataWriter::serialize(DataIO::Record obj)
 		std::memcpy(&buf[offset], &what, size);
 		offset += size;
 	};
-	buf.resize(DataIO::nameSize + DataIO::hashSize + sizeof(uint8_t) + sizeof(uint32_t) + 3 * sizeof(uint64_t) + sizeof(DataIO::FILETYPE));
+	buf.resize(DataIO::nameSize + DataIO::hashSize + sizeof(uint8_t) + sizeof(uint32_t) + 3 * sizeof(uint64_t) + sizeof(DataIO::FILETYPE) + sizeof(DataIO::FILETYPE));
 	/*serialize sequentially
 			malware_name dangerLevel PartOfSignature signatureLength SHA256 offsets */
 	obj.name.resize(DataIO::nameSize);
@@ -126,6 +138,7 @@ std::string DataIO::DataWriter::serialize(DataIO::Record obj)
 	serFunc(DataIO::hashSize, *obj.hash.data());
 	serFunc(sizeof(obj.offsetStart), obj.offsetStart);
 	serFunc(sizeof(obj.offsetEnd), obj.offsetEnd);
+	serFunc(sizeof(obj.type), obj.type);
 	return buf;
 }
 

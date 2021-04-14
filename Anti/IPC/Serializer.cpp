@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "Serializer.hpp"
 
 std::string Serializer::serialize(Header obj)//serialize Header obj
@@ -22,12 +21,14 @@ std::string Serializer::serialize(Command serType,Package obj)//serialize Packag
 	Package::PTYPE type;
 	switch (serType)
 	{
+	case Command::OFF_IT:
 	case Command::STOP_SCAN:
 		buf.resize(sizeof(type));
 		type = Package::PTYPE::NUL;//to stop scanning. we are not interested in the content
 		std::memcpy(&buf[offset], &type, sizeof(type));
 		break;
 	case Command::SCHEDUL:
+	case Command::UPDATE_DATA:
 	case Command::ADD_MONIT:
 	case Command::START_SCAN:
 	{
@@ -42,17 +43,21 @@ std::string Serializer::serialize(Command serType,Package obj)//serialize Packag
 		offset += sizeof(strSize);
 		for (auto& el : obj.strArr)
 		{
-			strSize = el.size() + 1;
+			strSize = el.size();
 			std::memcpy(&buf[offset], &strSize, sizeof(strSize));
 			offset += sizeof(strSize);
-			std::memcpy(&buf[offset], el.data(), el.size() + 1);
-			offset += el.size() + 1;
+			std::memcpy(&buf[offset], el.data(), el.size());
+			offset += el.size();
 		}
 		break;
 	}
+	case Command::DIST_DATA:
+	case Command::QUAR_DATA:
+	case Command::SCAN_COUNT:
 	case Command::REM_MONIT:
 	case Command::MOV_TO_QUAR://in this case, the packages will have the same content
 	case Command::DELETE_FILE:
+	case Command::BACK_FROM_QUAR:
 		uint32_t sizet = obj.valueArr.size();
 		type = Package::PTYPE::VEC;
 		buf.resize(obj.valueArr.size() * sizeof(uint32_t) + sizeof(Command) + sizeof(sizet));

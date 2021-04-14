@@ -8,7 +8,7 @@ namespace DataIO
 	constexpr char dataIndex[] = "Nadyezhniy";
 	constexpr const size_t nameSize = 10;
 	constexpr const size_t hashSize = 64;
-	constexpr const size_t recordSize = 103;
+	constexpr const size_t recordSize = 104;
 	
 	std::string createData();
 	bool isCorrectData(std::string& _path);

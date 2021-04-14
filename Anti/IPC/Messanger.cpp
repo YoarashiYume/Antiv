@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "Messanger.hpp"
 
 std::string Messanger::createMSG(Command cmd, Package & pcg)
@@ -9,15 +8,19 @@ std::string Messanger::createMSG(Command cmd, Package & pcg)
 	return (Serializer::serialize(head) + msg);
 }
 
-void Messanger::sendTo(std::string& msg)
+bool Messanger::sendTo(std::string& msg)
 {
 	std::size_t countOfPackage = Serializer::deserializeHeader(msg).value().countOfPackage;
 	std::size_t offset{ 0 };
+	DWORD count = 0;
 	for (size_t i = 0; i < countOfPackage; ++i)
 	{
-		WriteFile(pipe, &msg[offset], msgSize, NULL, 0);
+		WriteFile(pipe, &msg[offset], msgSize, &count, 0);
+		if (count == 0)
+			return false;
 		offset += msgSize;
 	}
+	return true;
 }
 
 std::optional <decript_type> Messanger::decriptMSG(std::string& str)
@@ -36,53 +39,53 @@ void Messanger::setPipe(HANDLE _pipe, size_t _msgSize)
 	msgSize = _msgSize;
 }
 
-void Messanger::sendStopMSG()
+bool Messanger::sendStopMSG()
 {
 	Package p;
 	std::string msg = createMSG(Command::STOP_SCAN, p);
-	sendTo(msg);
+	return sendTo(msg);
 }
 
-void Messanger::sendStartMSG(std::vector<std::string> stringArr)
+bool Messanger::sendStartMSG(std::vector<std::string> stringArr)
 {
 	Package p;
 	p.strArr = stringArr;
 	std::string msg = createMSG(Command::START_SCAN, p);
-	sendTo(msg);
+	return sendTo(msg);
 }
 
-void Messanger::sendStartMSG(std::string str)
+bool Messanger::sendStartMSG(std::string str)
 {
 	std::vector<std::string> temp{ str };
-	sendStartMSG(temp);
+	return sendStartMSG(temp);
 }
 
-void Messanger::sendValue(Command cmd, std::vector<VECTOR_TYPE> vectorArr)
+bool Messanger::sendValue(Command cmd, std::vector<VECTOR_TYPE> vectorArr)
 {
 	Package p;
 	p.valueArr = vectorArr;
 	std::string msg = createMSG(cmd, p);
-	sendTo(msg);
+	return sendTo(msg);
 }
 
-void Messanger::sendValue(Command cmd, VECTOR_TYPE value)
+bool Messanger::sendValue(Command cmd, VECTOR_TYPE value)
 {
 	std::vector<VECTOR_TYPE> temp{ value };
-	sendValue(cmd,temp);
+	return sendValue(cmd,temp);
 }
 
-void Messanger::sendCharArray(Command cmd, std::vector<std::string> stringArr)
+bool Messanger::sendCharArray(Command cmd, std::vector<std::string> stringArr)
 {
 	Package p;
 	p.strArr = stringArr;
 	std::string msg = createMSG(cmd, p);
-	sendTo(msg);
+	return sendTo(msg);
 }
 
-void Messanger::sendCharArray(Command cmd, std::string str)
+bool Messanger::sendCharArray(Command cmd, std::string str)
 {
 	std::vector<std::string> temp{ str };
-	sendCharArray(cmd, temp);
+	return sendCharArray(cmd, temp);
 }
 
 std::optional<return_type> Messanger::getMSG()
@@ -92,6 +95,8 @@ std::optional<return_type> Messanger::getMSG()
 	std::size_t offset{ 0 };
 	answer.resize(msgSize);
 	ReadFile(pipe, answer.data(), msgSize, &count, 0);
+	if (count==0)
+		return std::nullopt;
 	Header temp = Serializer::deserializeHeader(answer).value();
 	answer.resize(temp.size);
 	offset += msgSize;

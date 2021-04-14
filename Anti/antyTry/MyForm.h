@@ -25,8 +25,8 @@ namespace antyTry {
 		{
 			InitializeComponent();
 			Control::CheckForIllegalCrossThreadCalls = false;
-			//dw = new DataIO::DataWriter();
-			//dr = new DataIO::DataReader();
+			dw = new DataIO::DataWriter();
+			dr = new DataIO::DataReader();
 		}
 
 	protected:
@@ -36,8 +36,10 @@ namespace antyTry {
 			if (components)
 			{
 				delete components;
+				delete dw;
+				delete dr;
 			}
-
+			
 			
 		}
 	private: DataIO::DataWriter *dw;
@@ -58,11 +60,11 @@ namespace antyTry {
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::DataGridView^ dataGridView2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ aType;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ aName;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ aSign;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ aOffS;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ aOffE;
+
+
+
+
+
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column8;
@@ -71,6 +73,18 @@ namespace antyTry {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ aType;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ aName;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ aSign;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ aOffS;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ aOffE;
+
+
+
+
+
+
 
 
 
@@ -88,6 +102,14 @@ namespace antyTry {
 		void InitializeComponent(void)
 		{
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->pathBox = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
@@ -100,14 +122,7 @@ namespace antyTry {
 			this->aSign = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->aOffS = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->aOffE = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->SuspendLayout();
@@ -118,104 +133,10 @@ namespace antyTry {
 				this->Column1,
 					this->Column2, this->Column8, this->Column7, this->Column3, this->Column4, this->Column5, this->Column6
 			});
-			this->dataGridView1->Location = System::Drawing::Point(12, 12);
+			this->dataGridView1->Location = System::Drawing::Point(13, 12);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->Size = System::Drawing::Size(950, 280);
 			this->dataGridView1->TabIndex = 0;
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(224, 549);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(206, 23);
-			this->button1->TabIndex = 1;
-			this->button1->Text = L"Set Path";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
-			// 
-			// pathBox
-			// 
-			this->pathBox->Enabled = false;
-			this->pathBox->Location = System::Drawing::Point(12, 518);
-			this->pathBox->Name = L"pathBox";
-			this->pathBox->Size = System::Drawing::Size(951, 20);
-			this->pathBox->TabIndex = 2;
-			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(436, 549);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(206, 23);
-			this->button2->TabIndex = 3;
-			this->button2->Text = L"Load Data";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
-			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(12, 549);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(206, 23);
-			this->button3->TabIndex = 4;
-			this->button3->Text = L"Create Data";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
-			// 
-			// openFileDialog1
-			// 
-			this->openFileDialog1->FileName = L"openFileDialog1";
-			this->openFileDialog1->Filter = L"Binary files (*.bin)|*.bin";
-			// 
-			// button4
-			// 
-			this->button4->Location = System::Drawing::Point(12, 318);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(206, 23);
-			this->button4->TabIndex = 5;
-			this->button4->Text = L"Add Record";
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
-			// 
-			// dataGridView2
-			// 
-			this->dataGridView2->AllowUserToAddRows = false;
-			this->dataGridView2->AllowUserToDeleteRows = false;
-			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
-				this->aType,
-					this->aName, this->aSign, this->aOffS, this->aOffE
-			});
-			this->dataGridView2->Location = System::Drawing::Point(13, 347);
-			this->dataGridView2->Name = L"dataGridView2";
-			this->dataGridView2->Size = System::Drawing::Size(950, 59);
-			this->dataGridView2->TabIndex = 6;
-			this->dataGridView2->RowCount = 1;
-			// 
-			// aType
-			// 
-			this->aType->HeaderText = L"Type";
-			this->aType->Name = L"aType";
-			// 
-			// aName
-			// 
-			this->aName->HeaderText = L"Name";
-			this->aName->Name = L"aName";
-			// 
-			// aSign
-			// 
-			this->aSign->HeaderText = L"Signature";
-			this->aSign->Name = L"aSign";
-			this->aSign->Width = 150;
-			// 
-			// aOffS
-			// 
-			this->aOffS->HeaderText = L"Start Offset";
-			this->aOffS->Name = L"aOffS";
-			// 
-			// aOffE
-			// 
-			this->aOffE->HeaderText = L"End Offset";
-			this->aOffE->Name = L"aOffE";
 			// 
 			// Column1
 			// 
@@ -262,11 +183,115 @@ namespace antyTry {
 			this->Column6->Name = L"Column6";
 			this->Column6->Width = 325;
 			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(224, 549);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(206, 23);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"Set Path";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			// 
+			// pathBox
+			// 
+			this->pathBox->Enabled = false;
+			this->pathBox->Location = System::Drawing::Point(12, 518);
+			this->pathBox->Name = L"pathBox";
+			this->pathBox->Size = System::Drawing::Size(951, 20);
+			this->pathBox->TabIndex = 2;
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(436, 549);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(206, 23);
+			this->button2->TabIndex = 3;
+			this->button2->Text = L"Load Data";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(12, 549);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(206, 23);
+			this->button3->TabIndex = 4;
+			this->button3->Text = L"Create Data";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
+			// 
+			// openFileDialog1
+			// 
+			this->openFileDialog1->FileName = L"openFileDialog1";
+			this->openFileDialog1->Filter = L"Binary files (*.bin)|*.bin";
+			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(12, 327);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(206, 23);
+			this->button4->TabIndex = 5;
+			this->button4->Text = L"Add Record";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
+			// 
+			// dataGridView2
+			// 
+			this->dataGridView2->AllowUserToAddRows = false;
+			this->dataGridView2->AllowUserToDeleteRows = false;
+			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
+				this->aType,
+					this->aName, this->aSign, this->aOffS, this->aOffE
+			});
+			this->dataGridView2->Location = System::Drawing::Point(13, 356);
+			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->Size = System::Drawing::Size(950, 59);
+			this->dataGridView2->TabIndex = 6;
+			// 
+			// aType
+			// 
+			this->aType->HeaderText = L"Type";
+			this->aType->Name = L"aType";
+			// 
+			// aName
+			// 
+			this->aName->HeaderText = L"Name";
+			this->aName->Name = L"aName";
+			// 
+			// aSign
+			// 
+			this->aSign->HeaderText = L"Signature";
+			this->aSign->Name = L"aSign";
+			this->aSign->Width = 150;
+			// 
+			// aOffS
+			// 
+			this->aOffS->HeaderText = L"Start Offset";
+			this->aOffS->Name = L"aOffS";
+			// 
+			// aOffE
+			// 
+			this->aOffE->HeaderText = L"End Offset";
+			this->aOffE->Name = L"aOffE";
+			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(13, 298);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(206, 23);
+			this->button5->TabIndex = 7;
+			this->button5->Text = L"Remove Record";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &MyForm::button5_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(975, 582);
+			this->Controls->Add(this->button5);
 			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
@@ -280,6 +305,7 @@ namespace antyTry {
 			this->MinimizeBox = false;
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
+			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			this->ResumeLayout(false);
@@ -288,6 +314,41 @@ namespace antyTry {
 		}
 #pragma endregion
 private:
+	void rewrite()
+	{
+		auto index = dataGridView1->CurrentCell->RowIndex;
+		if (index == -1)
+			return;
+		DataIO::createData(msclr::interop::marshal_as<std::string>(pathBox->Text));
+		size_t size = (dataGridView1->RowCount)-1;
+		dw->setPath(msclr::interop::marshal_as<std::string>(pathBox->Text));
+		for (size_t i = 0; i < size; ++i)
+		{
+			if (i == index)
+				continue;
+			DataIO::Record r;
+			r.hash.resize(DataIO::hashSize);
+			r.name.resize(DataIO::nameSize);
+			r.hash = msclr::interop::marshal_as<std::string>((String^)dataGridView1->Rows[i]->Cells[7]->Value);
+			r.name = msclr::interop::marshal_as<std::string>((String^)dataGridView1->Rows[i]->Cells[2]->Value);
+			r.offsetEnd = Convert::ToInt32(dataGridView1->Rows[i]->Cells[6]->Value);
+			r.offsetStart = Convert::ToInt32(dataGridView1->Rows[i]->Cells[5]->Value);
+			r.signSize = Convert::ToInt32(dataGridView1->Rows[i]->Cells[4]->Value);
+			if (dataGridView1->Rows[i]->Cells[1]->Value == "exe")
+				r.type = DataIO::FILETYPE::EXE;
+			else if (dataGridView1->Rows[i]->Cells[1]->Value == "zip")
+				r.type = DataIO::FILETYPE::ZIP;
+			else 
+				r.type = DataIO::FILETYPE::UNKNOWN;
+			std::string tempV = msclr::interop::marshal_as<std::string>((String^)dataGridView1->Rows[i]->Cells[3]->Value);
+			std::memcpy(&r.signature, tempV.data(), sizeof(r.signature));
+			dw->writeInRec(r);
+		}
+		delete dr;
+		dr = new DataIO::DataReader();
+		dataGridView1->Rows->Clear();
+		readData();
+	}
 	void addRecord()
 	{
 		dw->setPath(msclr::interop::marshal_as<std::string>(pathBox->Text));
@@ -306,7 +367,10 @@ private:
 		else
 			ft = DataIO::FILETYPE::UNKNOWN;
 		if (dw->writeIn(arr[2], arr[1], std::stoi(arr[3]), std::stoi(arr[4]), ft))
+		{
+			dataGridView1->Rows->Clear();
 			readData();
+		}
 		dataGridView2->Rows->Clear();
 		dataGridView2->RowCount = 1;
 	}
@@ -322,7 +386,19 @@ private:
 			sign.resize(sizeof(uint64_t));
 			dataGridView1->Rows->Add();
 			dataGridView1->Rows[i]->Cells[0]->Value = i+1;
-			dataGridView1->Rows[i]->Cells[1]->Value = (int)res.value().type;
+			switch (res.value().type)
+			{
+			case DataIO::FILETYPE::EXE:
+				dataGridView1->Rows[i]->Cells[1]->Value = "exe";
+				break;
+			case DataIO::FILETYPE::ZIP:
+				dataGridView1->Rows[i]->Cells[1]->Value = "zip";
+				break;
+			default:
+				dataGridView1->Rows[i]->Cells[1]->Value = "?";
+				break;
+			}
+			//dataGridView1->Rows[i]->Cells[1]->Value = (int)res.value().type;
 			dataGridView1->Rows[i]->Cells[2]->Value = msclr::interop::marshal_as<String^>(res.value().name);
 			std::memcpy(sign.data(), &res.value().signature, sizeof(uint64_t));
 			dataGridView1->Rows[i]->Cells[3]->Value = msclr::interop::marshal_as<String^>(sign);
@@ -366,10 +442,21 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 {
 	if (pathBox->Text->Length)
 	{
+		delete dr;
+		dr = new DataIO::DataReader();
+		dataGridView1->Rows->Clear();
 		System::Threading::Thread^ th = gcnew Thread(gcnew ThreadStart(this, &MyForm::readData));
 		th->IsBackground = true;
 		th->Start();
 	}
+}
+private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+	System::Threading::Thread^ th = gcnew Thread(gcnew ThreadStart(this, &MyForm::rewrite));
+	th->IsBackground = true;
+	th->Start();
+}
+private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	this->dataGridView2->RowCount = 1;
 }
 };
 }

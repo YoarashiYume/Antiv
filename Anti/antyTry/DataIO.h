@@ -8,11 +8,11 @@ namespace DataIO
 	constexpr char dataIndex[] = "Nadyezhniy";
 	constexpr const size_t nameSize = 10;
 	constexpr const size_t hashSize = 64;
-	constexpr const size_t recordSize = 103;
+	constexpr const size_t recordSize = 104;
 	
 	std::string createData();
+	std::string createData(std::string str);
 	bool isCorrectData(std::string& _path);
-	
 	enum class FILETYPE :uint8_t
 	{
 		UNKNOWN,
@@ -51,10 +51,11 @@ namespace DataIO
 		DataWriter();
 		~DataWriter();
 		void setPath(std::string _path);
+		bool writeInRec(Record& rec);
 		bool writeIn(std::string _sign, std::string _malvareName, uint32_t _startOffset, uint32_t _endOffset, FILETYPE _type);
 	private:
 		std::string serialize(DataIO::Record obj);
-		bool writeInRec(Record& rec);
+		
 		std::fstream stream;
 		std::string path;
 		uint32_t countOfRecords = 0;	

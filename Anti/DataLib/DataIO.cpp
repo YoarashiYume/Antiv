@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "DataIO.h"
 
 
@@ -65,6 +64,7 @@ std::optional<DataIO::Record> DataIO::DataReader::deserializeRecord(std::string&
 	deserFunc(DataIO::hashSize, *temp.hash.data());
 	deserFunc(sizeof(temp.offsetStart), temp.offsetStart);
 	deserFunc(sizeof(temp.offsetEnd), temp.offsetEnd);
+	deserFunc(sizeof(temp.type), temp.type);
 	return temp;
 }
 
@@ -116,7 +116,7 @@ std::string DataIO::DataWriter::serialize(DataIO::Record obj)
 		std::memcpy(&buf[offset], &what, size);
 		offset += size;
 	};
-	buf.resize(DataIO::nameSize + DataIO::hashSize + sizeof(uint8_t) + sizeof(uint32_t) + 3 * sizeof(uint64_t) + sizeof(DataIO::FILETYPE));
+	buf.resize(DataIO::nameSize + DataIO::hashSize + sizeof(uint8_t) + sizeof(uint32_t) + 3 * sizeof(uint64_t) + sizeof(DataIO::FILETYPE) + sizeof(DataIO::FILETYPE));
 	/*serialize sequentially
 			malware_name dangerLevel PartOfSignature signatureLength SHA256 offsets */
 	obj.name.resize(DataIO::nameSize);
@@ -127,6 +127,7 @@ std::string DataIO::DataWriter::serialize(DataIO::Record obj)
 	serFunc(DataIO::hashSize, *obj.hash.data());
 	serFunc(sizeof(obj.offsetStart), obj.offsetStart);
 	serFunc(sizeof(obj.offsetEnd), obj.offsetEnd);
+	serFunc(sizeof(obj.type), obj.type);
 	return buf;
 }
 

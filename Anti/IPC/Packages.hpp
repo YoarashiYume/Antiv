@@ -1,10 +1,4 @@
 #pragma once
-#include "pch.h"
-#ifdef MATHLIBRARY_EXPORTS
-#define MATHLIBRARY_API __declspec(dllexport)
-#else
-#define MATHLIBRARY_API __declspec(dllimport)
-#endif
 #include <vector>
 #include <string>
 typedef uint32_t VECTOR_TYPE;
@@ -24,7 +18,12 @@ enum class Command : uint16_t
 	DELETE_FILE,
 	ADD_MONIT,
 	REM_MONIT,
-	SCHEDUL
+	SCHEDUL,
+	SCAN_COUNT,
+	DIST_DATA,
+	QUAR_DATA,
+	UPDATE_DATA,
+	OFF_IT
 };
 struct Package
 {

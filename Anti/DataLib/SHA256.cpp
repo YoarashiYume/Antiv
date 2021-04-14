@@ -1,4 +1,4 @@
-#include "pch.h"
+
 #include "SHA256.h"
 #include <cstring>
 #include <sstream>
@@ -16,6 +16,16 @@ SHA256::SHA256() : m_blocklen(0), m_bitlen(0) {
 }
 
 void SHA256::update(const uint8_t* data, size_t length) {
+	m_blocklen = 0;
+	m_bitlen = 0;
+	m_state[0] = 0x6a09e667;
+	m_state[1] = 0xbb67ae85;
+	m_state[2] = 0x3c6ef372;
+	m_state[3] = 0xa54ff53a;
+	m_state[4] = 0x510e527f;
+	m_state[5] = 0x9b05688c;
+	m_state[6] = 0x1f83d9ab;
+	m_state[7] = 0x5be0cd19;
 	for (size_t i = 0; i < length; i++) {
 		m_data[m_blocklen++] = data[i];
 		if (m_blocklen == 64) {
